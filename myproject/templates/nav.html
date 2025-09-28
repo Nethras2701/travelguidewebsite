@@ -1,0 +1,23 @@
+<nav>
+    <div class="logo"><i class="fa-solid fa-plane-departure"></i> Travel Guide</div>
+    <div class="navlinks">
+        {% if user.is_authenticated %}
+            <a href="{% url 'create_destination' %}">
+                <i class="fa-solid fa-map-pin"></i> Add Destination</a>
+            <a href="{% url 'destination_list' %}">
+                <i class="fa-solid fa-map-location-dot"></i> Destination List </a>
+            
+            <a href="{% url 'addactivity' %}">
+                <i class="fa-solid fa-person-hiking"></i> Add Activity </a>
+            
+            <a href="{% url 'allactivity' %}">
+                <i class="fa-solid fa-mountain-sun"></i> All Activities </a>
+
+            <a href="{% url 'profile' %}"> <i class="fa-solid fa-user"></i> Profile</a>
+            <a href="{% url 'signout' %}"> <i class="fa-solid fa-right-from-bracket"></i> Logout</a> 
+        {% else %}
+            <a href="{% url 'signup' %}"> 📝 Register</a>
+            <a href="{% url 'signin' %}"> 🔐 Login</a> 
+        {% endif %}
+    </div>
+</nav>

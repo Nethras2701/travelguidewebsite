@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+{% block content %}
+<br>
+<div class="photolist_container">
+<h2>🖼️ Gallery</h2>
+
+<span class="photolist_addphotolink">
+<a href="{% url 'addactivity' %}"> Add Photo</a>
+</span>
+<span class="photolist_historylink">
+<a href=""> History</a>
+</span>
+<div class="photolist_list">
+<ul>
+{% for i in data1 %}
+    {% if not i.is_deleted %}
+        <li>
+            <img src="{{i.image.url}}" height="200" width="300"> <br>
+            {{i.title}} <br>
+            <p>{{ i.desc|truncatewords:10 }}</p>
+            <a href="{% url 'actread' i.id %}"> Know More </a>
+            <a href="{% url 'actupdate' i.id %}">✏️ Edit</a>
+            <a href="{% url 'actdelete' i.id %}"> 🗑️ Delete</a> <br>
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>
+</div>
+<div class="photolist_bottomlink">
+<a href="{% url 'destination_list' %}">Back to all Destinations</a>
+</div>
+<br>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="profilepage">
+    {% if messages %}
+        <div id="messages">
+            {% for i in messages %}
+                <p>{{ i }}</p>
+            {% endfor %}
+        </div>
+        <script>
+            setTimeout(function(){
+                document.getElementById('messages').style.display='none';
+            }, 6000);
+        </script>
+    {% endif %}
+    <h2>👤 Profile</h2>
+    <h2>🌟 Welcome, {{ user.first_name }} {{ user.last_name }}!</h2>
+    <p>🆔 Username: {{ user.username }}</p>
+    <p>📧 Email: {{ user.email }}</p>
+    <a href="{% url 'update_profile' %}">✏️ Update Profile</a>
+    <a href="{% url 'update_password' %}">🔒 Update Password</a>
+    <a href="{% url 'signout' %}">🚪 Logout</a>
+</div>
+{% endblock %}

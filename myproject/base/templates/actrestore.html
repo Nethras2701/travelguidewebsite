@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="photorestore_container">
+    <h2 class="flip-rotate">Restore Activity 🥰</h2>
+    <p class="fade-in">Are you sure you want to restore "{{ data.title }}" 🥰🥰🥰???</p>
+    <br>
+    <img src="{{ data.image.url }}" width="200" class="zoom-in">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <br>
+        <button type="submit" class="button-animate">Yes! Restore</button>
+        <a href="{% url 'allactivity' %}" class="back-link">No! Back</a>
+    </form>
+</div>
+{% endblock %}

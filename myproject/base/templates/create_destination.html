@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="categorycreate_container">
+<h2>🧳 Add Destination </h2>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+</form>
+<a href="{% url 'destination_list' %}">Back to Destination</a>
+</div>
+{% endblock %}

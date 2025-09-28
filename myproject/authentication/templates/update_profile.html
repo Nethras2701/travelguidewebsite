@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="updatepage">
+
+    {% if messages %}
+        <div id="messages">
+            {% for i in messages %}
+                <p><i class="fa-solid fa-circle-info"></i> {{ i }}</p>
+            {% endfor %}
+        </div>
+        <script>
+            setTimeout(function(){
+                document.getElementById('messages').style.display='none';
+            }, 3000);
+        </script>
+    {% endif %}
+
+    <h2><i class="fa-solid fa-user-pen"></i> Update Profile </h2>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="firstname" value="{{ user.first_name }}" placeholder="🧑 First Name" required>
+        <input type="text" name="lastname" value="{{ user.last_name }}" placeholder="👤 Last Name" required>
+        <input type="text" name="email" value="{{ user.email }}" placeholder="📧 Email" required>
+        <input type="text" name="username" value="{{ user.username }}" placeholder="👥 Username" required>
+
+        <button type="submit">
+            <i class="fa-solid fa-user-check"></i> Update
+        </button>
+    </form>
+
+    <p>
+        ❌ Don't want to update profile?
+        <a href="{% url 'profile' %}"><i class="fa-solid fa-caret-left"></i> Back</a>
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,1845 @@
+
+        /* Base Styles */
+        :root {
+            --primary: #FF8DA1; /* Coral */
+            --secondary: #FFC2BA; /* Light Pink */ 
+            --accent: #FF9CE9; /* Pink */
+            --dark: #AD56C4; /* Purple */
+            --light: #FFFFFF; /* White */
+        }
+
+/* Make video full-screen background */
+#bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    object-fit: cover;
+    filter: brightness(80%); /* Optional dark overlay for better contrast */
+}
+
+/* Keep content above video */
+.content {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    color: white;
+}
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            /* background: url("./cssphotos/1854202-hd_1280_720_25fps.mp4");
+            background-repeat: no-repeat;
+            background-size: cover; */
+        }
+        
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--dark), #FF8DA1 80%);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top:0;
+            overflow: hidden;
+            z-index: 100;
+        }
+        
+        /* Logo with Advanced Animations */
+        .logo {
+            color: var(--light);
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            cursor: pointer;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            border-radius: 8px;
+            z-index: -1;
+            transform: translateZ(-1px);
+            transition: all 0.5s ease;
+        }
+        
+        .logo:hover {
+            transform: rotateY(15deg) scale(1.05) translateY(-5px);
+            color: white;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.4);
+        }
+        
+        .logo:hover::before {
+            transform: translateZ(-5px);
+            box-shadow: 0 10px 20px rgba(255, 193, 7, 0.3);
+        }
+        
+        /* Nav Links with Different Animations */
+        .navlinks {
+            display: flex;
+            gap: 1.0rem;
+            align-items: center;
+        }
+        
+        .navlinks a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.0rem;
+            font-weight: 500;
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            perspective: 500px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .navlinks a i {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Each link gets a unique hover animation */
+        .navlinks a:nth-child(1):hover {
+            background-color: var(--secondary);
+            transform: rotateY(10deg) translateY(-3px);
+            box-shadow: 0 6px 12px rgba(255, 193, 7, 0.3);
+        }
+        
+        .navlinks a:nth-child(2):hover {
+            background-color: #3B82F6;
+            transform: rotateX(10deg) translateY(-3px);
+            box-shadow: 0 6px 12px rgba(99, 102, 241, 0.3);
+        }
+        
+        .navlinks a:nth-child(3):hover {
+            background-color: #EC4899;
+            transform: rotateZ(5deg) translateY(-3px);
+            box-shadow: 0 6px 12px rgba(244, 114, 182, 0.3);
+        }
+        
+        .navlinks a:nth-child(4):hover {
+            background-color: #8B5CF6;
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 6px 12px rgba(167, 139, 250, 0.3);
+        }
+        
+        .navlinks a:nth-child(5):hover {
+            background-color: var(--accent);
+            animation: pulse 0.5s ease;
+            box-shadow: 0 6px 12px rgba(255, 230, 109, 0.3);
+        }
+        
+        .navlinks a:nth-child(6):hover {
+            background-color: #EF4444;
+            transform: translateY(-3px) rotate(5deg);
+            box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
+        }
+        
+        /* Login/Register links (if not authenticated) */
+        .navlinks a:nth-child(7):hover,
+        .navlinks a:nth-child(8):hover {
+            background-color: var(--primary);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
+        }
+        
+        /* Rotation animation for plane icon */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .logo:hover .fa-plane-departure {
+            animation: spin 1.5s linear infinite;
+        }
+        
+        /* Pulsing animation */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Additional effects for when the navbar is hovered */
+        nav:hover .logo {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
+            .navlinks {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+
+
+        /* Registration Page Styles */
+.signuppage {
+    background-color: var(--light);
+    border-radius: 10px;
+    padding: 2rem; /* Increased padding for more space */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 40px auto; /* Increased margin for better positioning */
+    animation: fadeIn 0.5s ease-in-out;
+    position: relative; /* For pseudo-element positioning */
+    overflow: hidden; /* To hide overflow from pseudo-elements */
+}
+
+.signuppage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 141, 161, 0.2), rgba(255, 141, 161, 0.1));
+    z-index: 0;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.signuppage h2 {
+    text-align: center;
+    color: var(--dark);
+    margin-bottom: 1.5rem; /* Increased margin for better separation */
+    position: relative; /* For text shadow effect */
+    z-index: 1; /* Bring text above the pseudo-element */
+}
+
+.signuppage h2:hover {
+    text-shadow: 0 2px 10px rgba(255, 141, 161, 0.5);
+}
+
+.signuppage form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Increased gap for more space between inputs */
+    z-index: 1; /* Bring form above the pseudo-element */
+    position: relative; /* For stacking context */
+}
+
+.signuppage input[type="text"],
+.signuppage input[type="password"],
+.signuppage input[type="email"] {
+    padding: 0.75rem; /* Increased padding for better input area */
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signuppage input[type="text"]:focus,
+.signuppage input[type="password"]:focus,
+.signuppage input[type="email"]:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 5px var(--primary), 0 0 10px rgba(255, 141, 161, 0.5);
+}
+
+.signuppage input[type="text"]:hover,
+.signuppage input[type="password"]:hover,
+.signuppage input[type="email"]:hover {
+    border-color: var(--primary);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signuppage input[type="submit"] {
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    padding: 0.75rem; /* Increased padding for the submit button */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* For stacking context */
+    overflow: hidden; /* To hide overflow from pseudo-elements */
+}
+
+.signuppage input[type="submit"]::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0; /* Behind the button text */
+}
+
+.signuppage input[type="submit"]:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.signuppage input[type="submit"]:hover {
+    background-color: var(--secondary);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in animation for the sign-up page */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Link styles */
+.signuppage p {
+    text-align: center;
+    color: var(--dark);
+}
+
+.signuppage a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.signuppage a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.signuppage::before,
+.signuppage::after {
+    pointer-events: none;  /* ✅ allow clicks to pass through */
+}
+
+
+
+
+/* Sign-in Page Styles */
+.signinpage {
+    background-color:var(--light); /* Slightly transparent background */
+    border-radius: 10px;
+    padding: 2rem; /* Padding for the form */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-width: 350px;
+    margin: 40px auto; /* Center the form */
+    position: relative; /* For pseudo-element positioning */
+    overflow: hidden; /* To hide overflow from pseudo-elements */
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+.signinpage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 141, 161, 0.2), rgba(255, 141, 161, 0.1));
+    z-index: 0;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.signinpage h2 {
+    text-align: center;
+    color: var(--dark);
+    margin-bottom: 1.5rem; /* Margin for separation */
+    position: relative; /* For text shadow effect */
+    z-index: 1; /* Bring text above the pseudo-element */
+}
+
+.signinpage h2:hover {
+    text-shadow: 0 2px 10px rgba(255, 141, 161, 0.5);
+}
+
+.signinpage .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between form elements */
+    z-index: 1; /* Bring form above the pseudo-element */
+    position: relative; /* For stacking context */
+}
+
+.signinpage .form-container input[type="text"],
+.signinpage .form-container input[type="password"] {
+    padding: 0.75rem; /* Padding for input fields */
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signinpage .form-container input[type="text"]:focus,
+.signinpage .form-container input[type="password"]:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 5px var(--primary), 0 0 10px rgba(255, 141, 161, 0.5);
+}
+
+.signinpage .form-container input[type="text"]:hover,
+.signinpage .form-container input[type="password"]:hover {
+    border-color: var(--primary);
+}
+
+.signinpage .form-container button {
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    padding: 0.75rem; /* Padding for the button */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* For stacking context */
+    overflow: hidden; /* To hide overflow from pseudo-elements */
+}
+
+.signinpage .form-container button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0; /* Behind the button text */
+}
+
+.signinpage .form-container button:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.signinpage .form-container button:hover {
+    background-color: var(--secondary);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in animation for the sign-in page */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Link styles */
+.signinpage p {
+    text-align: center;
+    color: var(--dark);
+}
+
+.signinpage a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.signinpage a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+
+
+
+
+/* Profile Page Styles */
+.profilepage {
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent background */
+    border-radius: 12px;
+    padding: 2rem; /* Padding for the profile container */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 40px auto; /* Center the profile container */
+    position: relative; /* For pseudo-element positioning */
+    overflow: hidden; /* To hide overflow from pseudo-elements */
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+.profilepage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 141, 161, 0.2), rgba(255, 141, 161, 0.1));
+    z-index: 0;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.profilepage h2 {
+    text-align: center;
+    color: var(--dark);
+    margin-bottom: 1rem; /* Margin for separation */
+    position: relative; /* For text shadow effect */
+    z-index: 1; /* Bring text above the pseudo-element */
+}
+
+.profilepage h2:hover {
+    text-shadow: 0 2px 10px rgba(255, 141, 161, 0.5);
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.profilepage p {
+    color: var(--dark);
+    margin: 0.5rem 0; /* Margin for spacing between paragraphs */
+    z-index: 1; /* Bring text above the pseudo-element */
+}
+
+.profilepage a {
+    display: inline-block; /* Make links block-level for better spacing */
+    margin: 0.5rem 0; /* Margin for spacing */
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    z-index: 1; /* Bring links above the pseudo-element */
+}
+
+.profilepage a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+    text-shadow: 0 2px 10px rgba(255, 141, 161, 0.5);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profilepage::before,
+.profilepage::after {
+    pointer-events: none;  /* ✅ allow clicks to pass through */
+}
+
+
+
+
+
+/* Update Profile Page Styles */
+.updatepage {
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent background */
+    border-radius: 12px;
+    padding: 1.5rem; /* Padding for the update container */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 40px auto; /* Center the update container */
+    position: relative; /* For pseudo-element positioning */
+    overflow: hidden; /* To hide overflow from pseudo-elements */
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+.updatepage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 141, 161, 0.2), rgba(255, 141, 161, 0.1));
+    z-index: 0;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.updatepage h2 {
+    text-align: center;
+    color: var(--dark);
+    margin-bottom: 1.5rem; /* Margin for separation */
+    position: relative; /* For text shadow effect */
+    z-index: 1; /* Bring text above the pseudo-element */
+}
+
+.updatepage h2:hover {
+    text-shadow: 0 2px 10px rgba(255, 141, 161, 0.5);
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.updatepage form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between form elements */
+    z-index: 1; /* Bring form above the pseudo-element */
+    position: relative; /* For stacking context */
+}
+
+.updatepage input[type="text"] {
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+    padding: 0.6rem; /* Padding for input fields */
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.updatepage input[type="text"]:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 5px var(--primary), 0 0 10px rgba(255, 141, 161, 0.5);
+}
+
+.updatepage input[type="text"]:hover {
+    border-color: var(--primary);
+}
+
+.updatepage button {
+    width: 50%;
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    padding: 0.75rem; /* Padding for the button */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* For stacking context */
+    overflow: hidden; /* To hide overflow from pseudo-elements */
+    display: block;
+    margin: 0 auto;
+
+}
+
+.updatepage button:hover {
+    background-color: var(--secondary);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Link styles */
+.updatepage p {
+    text-align: center;
+    color: var(--dark);
+}
+
+.updatepage a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.updatepage a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+
+
+
+/* Update Password Page Styles */
+.update_password {
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent background */
+    border-radius: 12px;
+    padding: 2rem; /* Padding for the update container */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 40px auto; /* Center the update container */
+    position: relative; /* For pseudo-element positioning */
+    overflow: hidden; /* To hide overflow from pseudo-elements */
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+.update_password::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 141, 161, 0.2), rgba(255, 141, 161, 0.1));
+    z-index: 0;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.update_password h2 {
+    text-align: center;
+    color: var(--dark);
+    margin-bottom: 1.5rem; /* Margin for separation */
+    position: relative; /* For text shadow effect */
+    z-index: 1; /* Bring text above the pseudo-element */
+}
+
+.update_password h2:hover {
+    text-shadow: 0 2px 10px rgba(255, 141, 161, 0.5);
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.update_password form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between form elements */
+    z-index: 1; /* Bring form above the pseudo-element */
+    position: relative; /* For stacking context */
+}
+
+.update_password input[type="password"] {
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+    padding: 0.75rem; /* Padding for input fields */
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.update_password input[type="password"]:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 5px var(--primary), 0 0 10px rgba(255, 141, 161, 0.5);
+}
+
+.update_password input[type="password"]:hover {
+    border-color: var(--primary);
+}
+
+.update_password button {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    padding: 0.75rem; /* Padding for the button */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* For stacking context */
+    overflow: hidden; /* To hide overflow from pseudo-elements */
+}
+
+.update_password button:hover {
+    background-color: var(--secondary);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Link styles */
+.update_password p {
+    text-align: center;
+    color: var(--dark);
+}
+
+.update_password a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.update_password a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+.update_password::before,
+.update_password::after {
+    pointer-events: none;  /* ✅ allow clicks to pass through */
+}
+
+
+
+
+
+/* Add Destination Page Styles */
+.categorycreate_container {
+    background-color: rgba(255, 255, 255, 0.742); /* Slightly transparent background */
+    border-radius: 12px;
+    padding: 1.5rem; /* Padding for the container */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 40px auto; /* Center the container */
+    position: relative; /* For pseudo-element positioning */
+    overflow: hidden; /* To hide overflow from pseudo-elements */
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+.categorycreate_container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 141, 161, 0.2), rgba(255, 141, 161, 0.1));
+    z-index: 0;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.categorycreate_container h2 {
+    text-align: center;
+    color: var(--dark);
+    margin-bottom: 1.5rem; /* Margin for separation */
+    position: relative; /* For text shadow effect */
+    z-index: 1; /* Bring text above the pseudo-element */
+}
+
+.categorycreate_container h2:hover {
+    text-shadow: 0 2px 10px rgba(255, 141, 161, 0.5);
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.categorycreate_container form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Space between form elements */
+    z-index: 1; /* Bring form above the pseudo-element */
+    position: relative; /* For stacking context */
+}
+
+.categorycreate_container input[type="text"],
+.categorycreate_container input[type="file"] {
+    width: 100%;
+    padding: 0.75rem; /* Padding for input fields */
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.categorycreate_container input[type="text"]:focus,
+.categorycreate_container input[type="file"]:focus {
+    width: 100%;
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 5px var(--primary), 0 0 10px rgba(255, 141, 161, 0.5);
+}
+
+.categorycreate_container input[type="text"]:hover,
+.categorycreate_container input[type="file"]:hover {
+    border-color: var(--primary);
+}
+
+.categorycreate_container button {
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    padding: 0.75rem; /* Padding for the button */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* For stacking context */
+    overflow: hidden; /* To hide overflow from pseudo-elements */
+}
+
+.categorycreate_container button:hover {
+    background-color: var(--secondary);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Link styles */
+.categorycreate_container a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: block; /* Make link block-level for better spacing */
+    text-align: center; /* Center the link */
+    margin-top: 0.2rem; /* Margin for spacing */
+}
+
+.categorycreate_container a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+
+
+
+/* Destination List Page Styles */
+.categorylist_container {
+    background-color: rgba(255, 255, 255, 0.632);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin: 40px auto;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Destination Item Button Styles */
+.destination-item button {
+    background: linear-gradient(135deg, #FF8DA1, #FF9CE9); /* Gradient background */
+    color: #fff; /* White text color */
+    font-size: 16px; /* Slightly larger font size */
+    padding: 0.8rem 1.5rem; /* Increased padding for a more substantial button */
+    border: none; /* Remove border */
+    border-radius: 50px; /* Fully rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: all 0.4s ease; /* Smooth transition for all properties */
+    box-shadow: 0 4px 12px rgba(255, 156, 233, 0.3); /* Enhanced shadow */
+    margin-bottom: 1.5rem; /* Space below the button */
+    font-weight: 700; /* Bold text */
+    position: relative; /* For positioning pseudo-elements */
+    overflow: hidden; /* To hide overflow from pseudo-elements */
+}
+
+/* Hover Effects */
+.destination-item button:hover {
+    background: linear-gradient(135deg, #FF9CE9, #FF8DA1); /* Reverse gradient on hover */
+    transform: translateY(-3px); /* Lift effect on hover */
+    box-shadow: 0 6px 16px rgba(173, 86, 196, 0.4); /* Darker shadow on hover */
+}
+
+/* Animation Effect on Hover */
+.destination-item button::before {
+    content: ''; /* Empty content for pseudo-element */
+    position: absolute; /* Position it absolutely */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    width: 300%; /* Large width for the ripple effect */
+    height: 300%; /* Large height for the ripple effect */
+    background: rgba(255, 255, 255, 0.3); /* Light white background */
+    border-radius: 50%; /* Circular shape */
+    transform: translate(-50%, -50%) scale(0); /* Start scaled down */
+    transition: transform 0.5s ease; /* Smooth transition for scaling */
+    z-index: 0; /* Behind the button text */
+}
+
+/* Trigger the ripple effect on hover */
+.destination-item button:hover::before {
+    transform: translate(-50%, -50%) scale(1); /* Scale up on hover */
+}
+
+/* Style for the link inside the button */
+.destination-item button a {
+    color: inherit; /* Inherit color from button */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make it inline-block */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    position: relative; /* For positioning */
+    z-index: 1; /* Bring link above the pseudo-element */
+}
+
+/* Change link color on hover */
+.destination-item button a:hover {
+    color: #fff; /* Change link color on hover */
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); /* Add shadow to link text */
+}
+
+
+.categorylist_container a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+     /*display: block;  Make link block-level for better spacing */
+    text-align: center; /* Center the link */
+    margin-top: 0.2rem; /* Margin for spacing */
+}
+
+.categorylist_container a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.image-scroll-container {
+    display: flex;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding: 1rem 0;
+    width: 100%;
+}
+
+.image-scroll-container img {
+    scroll-snap-align: start;
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.image-scroll-container img:hover {
+    transform: scale(1.05);
+}
+
+.scroll-button {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 20px;
+    position: absolute;
+    z-index: 10;
+}
+
+.scroll-button.left {
+    left: 10px;
+}
+
+.scroll-button.right {
+    right: 10px;
+}
+
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+/* Destination Read Container Styles */
+.destread_container {
+    background-color: rgba(255, 255, 255, 0.564); /* Slightly transparent background */
+    border-radius: 12px; /* Rounded corners */
+    padding: 2rem; /* Padding for the container */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    max-width: 600px; /* Maximum width for the container */
+    margin: 40px auto; /* Center the container */
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+    text-align: center; /* Center text alignment */
+}
+
+/* Heading Styles */
+.destread_container h3 {
+    color: var(--dark); /* Use the dark color variable */
+    margin-bottom: 1rem; /* Space below the heading */
+    font-size: 2rem; /* Increase font size for the heading */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Image Styles */
+.destread_container img {
+    border-radius: 8px; /* Rounded corners for the image */
+    max-width: 100%; /* Responsive image */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 1.5rem; /* Space below the image */
+}
+
+/* Paragraph Styles */
+.destread_container p {
+    color: #EC4899; /* Use the dark color variable */
+    line-height: 1.6; /* Increase line height for readability */
+    font-size: 1.1rem; /* Slightly larger font size */
+    margin: 0; /* Remove default margin */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+
+/* ================allactivity=================== */
+/* Base Styles */
+.photolist_container {
+    background-color: #ff8da28a; /* Slightly transparent background */
+    border-radius: 12px;
+    padding: 2rem; /* Padding for the container */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    max-width: 800px; /* Maximum width for the container */
+    margin: 40px auto; /* Center the container */
+    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+}
+
+/* Heading Styles */
+.photolist_container h2 {
+    text-align: center;
+    color: var(--dark);
+    margin-bottom: 1.5rem; /* Space below the heading */
+    font-size: 2rem; /* Increase font size for the heading */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Link Styles */
+.photolist_addphotolink,
+.photolist_historylink {
+    display: inline-block;
+    margin: 0 1rem; /* Space between links */
+}
+
+.photolist_addphotolink a,
+.photolist_historylink a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.photolist_addphotolink a:hover,
+.photolist_historylink a:hover {
+    color: var(--accent);
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Form Styles */
+form {
+    margin: 1.5rem 0; /* Space above and below the form */
+    text-align: center; /* Center the form */
+}
+
+form select {
+    padding: 0.5rem;
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+form select:hover {
+    border-color: var(--primary);
+}
+
+/* List Styles */
+ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+}
+
+ul li {
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background for list items */
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0; /* Space between list items */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease; /* Smooth transform on hover */
+}
+
+ul li:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+/* Image Styles */
+ul li img {
+    border-radius: 8px; /* Rounded corners for images */
+    max-width: 100%; /* Responsive image */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Button Styles */
+ul li a {
+    display: inline-block;
+    margin: 0.5rem 0; /* Space between buttons */
+    padding: 0.5rem 1rem; /* Padding for buttons */
+    background-color: var(--primary);
+    color: var(--light);
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+ul li a:hover {
+    background-color: var(--accent);
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .photolist_container {
+        padding: 1rem; /* Reduce padding on smaller screens */
+    }
+
+    ul li {
+        padding: 0.5rem; /* Reduce padding for list items */
+    }
+
+    ul li a {
+        padding: 0.5rem; /* Reduce padding for buttons */
+    }
+}
+
+
+
+
+
+
+
+
+
+/* ==========================add activity============================== */
+/* Add Activity Container */
+.addactivity_container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 400px;
+    margin: 2rem auto;
+    box-shadow: 0 8px 32px rgba(173, 86, 196, 0.2);
+    backdrop-filter: blur(8px);
+    animation: fadeInUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Heading with Emoji */
+.addactivity_container h2 {
+    text-align: center;
+    color: #AD56C4;
+    font-size: 2.0rem;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.addactivity_container h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #FF8DA1, #FF9CE9);
+    border-radius: 2px;
+    animation: underlineGrow 0.8s ease-out;
+}
+
+/* Form Container */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Form Inputs */
+.form-container p {
+    margin: 0;
+    position: relative;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #5E5E5E;
+    font-weight: 500;
+    transform-origin: left;
+    transition: all 0.3s ease;
+}
+
+.form-container input[type="text"],
+.form-container input[type="file"],
+.form-container textarea,
+.form-container select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.form-container input[type="text"]:focus,
+.form-container textarea:focus,
+.form-container select:focus {
+    border-color: #FF8DA1;
+    box-shadow: 0 0 0 3px rgba(255, 141, 161, 0.3);
+    outline: none;
+}
+
+.form-container input[type="file"] {
+    padding: 0.5rem;
+}
+
+/* Submit Button */
+.form-container button[type="submit"] {
+    background: linear-gradient(135deg, #FF8DA1, #FF9CE9);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 141, 161, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-container button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 141, 161, 0.4);
+}
+
+.form-container button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.form-container button[type="submit"]:hover::before {
+    left: 100%;
+}
+
+/* Back Link */
+.addactivity_container a {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: #5E5E5E;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.addactivity_container a:hover {
+    color: #FF8DA1;
+}
+
+.addactivity_container a::after {
+    content: '←';
+    position: absolute;
+    left: -20px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.addactivity_container a:hover::after {
+    opacity: 1;
+    left: -25px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes underlineGrow {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100px;
+    }
+}
+
+/* Floating animation for emoji */
+.addactivity_container h2::before {
+    content: '🎯';
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+    margin-right: 10px;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .addactivity_container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .addactivity_container h2 {
+        font-size: 1.8rem;
+    }
+}
+
+
+
+
+
+
+
+/* ==================================activity of each dest */
+/* Gallery Container */
+.photolist_container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    box-shadow: 0 8px 32px rgba(173, 86, 196, 0.2);
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Heading with Emoji */
+.photolist_container h2 {
+    text-align: center;
+    color: #AD56C4;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+/* Link Styles */
+.photolist_addphotolink,
+.photolist_historylink {
+    display: inline-block;
+    margin: 0 1rem; /* Space between links */
+}
+
+.photolist_addphotolink a,
+.photolist_historylink a {
+    color: #AD56C4;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.photolist_addphotolink a:hover,
+.photolist_historylink a:hover {
+    color: #FF8DA1;
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* List Styles */
+.photolist_list {
+    margin-top: 1.5rem; /* Space above the list */
+}
+
+.photolist_list ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: space-between; /* Space between items */
+}
+
+.photolist_list li {
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background for list items */
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0; /* Space between list items */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease; /* Smooth transform on hover */
+    width: calc(30% - 1rem); /* Responsive width */
+    position: relative; /* For positioning pseudo-elements */
+}
+
+/* Image Styles */
+.photolist_list img {
+    border-radius: 8px; /* Rounded corners for images */
+    max-width: 100%; /* Responsive image */
+    height: auto; /* Maintain aspect ratio */
+    transition: transform 0.3s ease; /* Smooth transform on hover */
+}
+
+.photolist_list li:hover img {
+    transform: scale(1.05); /* Enlarge image on hover */
+}
+
+.photolist_list li:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+/* Button Styles */
+.photolist_list a {
+    display: inline-block;
+    margin: 0.5rem 0; /* Space between buttons */
+    padding: 0.5rem 1rem; /* Padding for buttons */
+    background-color: #AD56C4;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.photolist_list a:hover {
+    background-color: #FF8DA1; /* Change color on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Bottom Link */
+.photolist_bottomlink {
+    text-align: center; /* Center the link */
+    margin-top: 2rem; /* Space above the link */
+}
+
+.photolist_bottomlink a {
+    color: #5E5E5E;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.photolist_bottomlink a:hover {
+    color: #AD56C4; /* Change color on hover */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .photolist_list li {
+        width: calc(45% - 1rem); /* Adjust width for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .photolist_list li {
+        width: 100%; /* Full width for very small screens */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======================actread======================================== */
+    :root {
+        --primary: #8B5CF6;
+        --secondary: #EC4899;
+        --accent: #FF9CE9;
+        --dark: #4C1D95;
+        --light: #FAFAFA;
+        --text-dark: #1F2937;
+        --price-color: #10B981;
+    }
+
+    /* Base Animation Setup */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes gradientFlow {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    /* Main Container */
+    .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(
+            90deg,
+            var(--primary),
+            var(--accent),
+            var(--secondary)
+        );
+        background-size: 200% 200%;
+        animation: gradientFlow 6s ease infinite;
+    }
+
+    /* Heading */
+    .container h3 {
+        color: var(--dark);
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .container h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: var(--accent);
+        animation: growLine 1s ease-out forwards;
+    }
+
+    @keyframes growLine {
+        from {
+            width: 0;
+        }
+        to {
+            width: 80px;
+        }
+    }
+
+    /* Image Styles */
+    .container img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto 2rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        transition: all 0.4s ease;
+        animation: pulse 3s infinite;
+    }
+
+    .container img:hover {
+        transform: scale(1.02) rotate(-1deg);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Description Text */
+    .container p {
+        color: var(--text-dark);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        padding: 0 1rem;
+        position: relative;
+    }
+
+    /* Special Styling for Price */
+    .container p:contains("Price:") {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--price-color);
+        display: flex;
+        align-items: center;
+    }
+
+    .container p:contains("Price:")::before {
+        content: '₹';
+        margin-right: 5px;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    /* Rating Styles */
+    .container p:contains("Rating:") {
+        display: flex;
+        align-items: center;
+    }
+
+    .container p:contains("Rating:")::after {
+        content: '★★★★★';
+        color: #F59E0B;
+        font-size: 1.5rem;
+        margin-left: 10px;
+        letter-spacing: 2px;
+    }
+
+    /* Visiting Time Styles */
+    .container p:contains("Visiting Time:") {
+        display: flex;
+        align-items: center;
+    }
+
+    .container p:contains("Visiting Time:")::before {
+        content: '⏱️';
+        margin-right: 8px;
+        animation: float 2.5s ease-in-out infinite;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .container {
+            padding: 1.5rem;
+            margin: 1rem;
+        }
+        
+        .container h3 {
+            font-size: 2rem;
+        }
+        
+        .container p {
+            font-size: 1rem;
+        }
+    }
+
+    /* Advanced Hover Effects */
+    .container p:hover {
+        background: linear-gradient(
+            90deg,
+            rgba(255, 156, 233, 0.1),
+            rgba(255, 255, 255, 0),
+            rgba(255, 156, 233, 0.1)
+        );
+        transform: translateX(5px);
+        transition: all 0.3s ease;
+    }

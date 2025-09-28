@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="addactivity_container">
+<h2> Add Activity</h2>
+
+<form action="" method="POST" enctype="multipart/form-data" class="form-container">
+    {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+</form>
+<a href="{% url 'destination_list' %}">Back</a>
+</div>
+{% endblock %}

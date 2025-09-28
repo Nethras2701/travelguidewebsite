@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% block content %}
+<br>
+<div class="photolist_container">
+<h2>All Activities</h2>
+
+<span class="photolist_addphotolink">
+<a href="{% url 'addactivity' %}"> Add Activity</a>
+</span>
+<span class="photolist_historylink">
+<a href="{% url 'acthistory' %}"> History</a>
+</span>
+<br>
+<br>
+<form action="" method="GET">
+    <select name="destination_id" onchange="this.form.submit()">
+        <option value="">All Activities</option>
+        {% for i in data %}
+            <option value="{{i.id}}" {% if i.id|stringformat:"s" == request.GET.destination_id %} selected {% endif %}>{{i.name}}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<ul>
+{% for i in data1 %}
+    {% if not i.is_deleted %}
+        <li>
+            <img src="{{i.image.url}}" height="200" width="300"> <br>
+            {{i.title}} <br>
+            <a href="{% url 'actread' i.id %}"> 📖 Know More </a>
+            <a href="{% url 'actupdate' i.id %}">✏️ Edit</a>
+            <a href="{% url 'actdelete' i.id %}"> 🗑️ Delete</a>
+
+        </li>
+    {% endif %}
+{% endfor %}
+</ul>
+<a href="{% url 'destination_list' %}">Back to Destination List</a>
+<br>
+</div>
+{% endblock %}

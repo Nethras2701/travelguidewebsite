@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="deletepermanently_container">
+    <br>
+    <h2 class="flip-rotate">⛔ Delete Activity Permanently</h2>
+    <p class="fade-in">Are you sure you want to delete "{{ data.title }}" Permanently 😭😭😭???</p> <br>
+    <img src="{{ data.image.url }}" width="200" class="zoom-in"> <br>
+    <form action="" method="POST">
+        {% csrf_token %} <br>
+        <button class="delete-permanent-btn button-animate" type="submit">
+            <i class="fas fa-trash"></i> Delete Permanently
+        </button>
+        <a href="{% url 'allactivity' %}" class="back-link">No! Back</a>
+    </form>
+</div>
+{% endblock %}

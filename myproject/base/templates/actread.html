@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="container">
+    <h3>{{act_data.title}} 🚀</h3>
+    <img src="{{ act_data.image.url }}" alt="{{ act_data.title }}">
+    <p>{{act_data.desc}}</p>
+    <p>💰Price: {{act_data.price}}</p>
+    <p>⌛Visiting Time: {{act_data.visiting_time}}</p>        
+    <p>🌟Rating: {{act_data.get_rating_display }}</p>
+</div>
+
+{% endblock %}

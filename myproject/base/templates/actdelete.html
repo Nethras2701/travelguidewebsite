@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="actdelete_container">
+    <br>
+<h2 class="flip-rotate">🚮 Delete Activity</h2>
+
+<p class="fade-in">Are you sure you want to delete {{data.title}} 😟😟😟???</p> <br>
+
+<img src="{{ data.image.url }}" width="200" class="zoom-in"> <br> <br>
+
+<form action="" method="POST" class="form-animate">
+    {% csrf_token %}
+    <button type="submit" class="button-animate">Yes! Delete</button>
+    <a href="{% url 'allactivity' %}" class="back-link">No! Back</a>
+</form>
+</div>
+{% endblock %}

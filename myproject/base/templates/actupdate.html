@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="actupdate_container">
+<h2>📝 Update Activity</h2>
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+</form>
+<a href="{% url 'allactivity' %}">All Activity</a>
+<br>
+</div>
+{% endblock %}

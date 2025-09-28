@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="photohistory_container">
+    <h2 class="flip-rotate">📜 History</h2>
+    <a href="{% url 'allactivity' %}" class="back-link">⬅️ Back to All Activity</a>
+    <br>
+    <br>
+    <ul>
+        {% for i in data %}
+        <li class="fade-in">
+            <img src="{{ i.image.url }}" width="250" height="200px" class="zoom-in"> <br>
+            {{ i.title }} <strong style="color:#a777e3">{{ i.category }}</strong> (Deleted at: {{ i.deleted_at }}) <br> <br>
+            <a href="{% url 'actrestore' i.id %}" class="a-animate">🔄 Restore</a>
+            <a href="{% url 'actdeleteperm' i.id %}" class="a-animate">🗑️ Delete Permanently</a> <br> <br>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="signuppage">
+    <h2><i class="fa-solid fa-user-plus"></i> Sign Up </h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="👤 Username" required>
+        <input type="email" name="email" placeholder="📧 Email" required>
+        <input type="password" name="password1" placeholder="🔒 Password" required>
+        <input type="password" name="password2" placeholder="🔒 Confirm Password" required>
+        <input type="submit" value="🚀 Create Account">
+    </form>
+    <p>Already have an account? <a href="{% url 'signin' %}">🔑 Login here</a></p>
+</div>
+
+
+{% endblock %}

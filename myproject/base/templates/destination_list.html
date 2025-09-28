@@ -1,0 +1,69 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="categorylist_container">
+  <h2>🗺️ Destination List </h2>
+  <a href="{% url 'create_destination' %}" class="btn btn-success">🏝️ Add New Destination</a>
+  <a href="{% url 'addactivity' %}" class="btn btn-info">🎯 Add Activity</a>
+  
+  <div class="carousel-container">
+    <button class="scroll-button left" disabled>◄</button>
+    <div class="image-scroll-container">
+      {% for i in data %}
+        <div class="destination-item">
+        <button>
+          <a href="{% url 'activityofeachdest' i.id %}">
+          <strong>{{ i.name }}</strong>
+          </a>
+        </button>
+          <img src="{{ i.image.url }}" alt="{{ i.name }}">
+          <p>{{ i.desc|truncatewords:10 }}</p>
+          <a href="{% url 'destread' i.id %}" class="btn btn-primary">View More</a>
+        </div>
+      {% endfor %}
+    </div>
+    <button class="scroll-button right">►</button>
+  </div>
+
+  
+  <br>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.querySelector('.image-scroll-container');
+        const leftButton = document.querySelector('.scroll-button.left');
+        const rightButton = document.querySelector('.scroll-button.right');
+        const markers = document.querySelectorAll('.scroll-marker');
+
+        let scrollAmount = 0;
+
+        function updateButtons() {
+            leftButton.disabled = scrollAmount <= 0;
+            rightButton.disabled = scrollAmount >= container.scrollWidth - container.clientWidth;
+        }
+
+        leftButton.addEventListener('click', () => {
+            scrollAmount -= 300; // Adjust scroll amount as needed
+            container.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+            updateButtons();
+        });
+
+        rightButton.addEventListener('click', () => {
+            scrollAmount += 300; // Adjust scroll amount as needed
+            container.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+            updateButtons();
+        });
+
+        container.addEventListener('scroll', () => {
+            const scrollLeft = container.scrollLeft;
+            const totalWidth = container.scrollWidth - container.clientWidth;
+            const currentIndex = Math.round((scrollLeft / totalWidth) * (markers.length - 1));
+            markers.forEach((marker, index) => {
+                marker.classList.toggle('active', index === currentIndex);
+            });
+        });
+
+        updateButtons(); // Initial button state
+    });
+</script>
+{% endblock %}
