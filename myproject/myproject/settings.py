@@ -24,7 +24,8 @@ SECRET_KEY = 'django-insecure-piq-aq&=ghnii0_k_@0q(i597%0$zh_qc_ao1@4c=4wpzot4&d
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['travelguide.com', 'nethras.pythonanywhere.com', 'travelguidewebsite.onrender.com','127.0.0.1', 'localhost']
+
+ALLOWED_HOSTS = ['travelguide.com', 'travelguidewebsite.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -37,7 +38,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'authentication',
+    'cloudinary',
+    'cloudinary_storage',
+
 ]
+
+# Cloudinary settings
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dq72kr1f2',
+    'API_KEY': '627789276541544',
+    'API_SECRET': 'PU2K61MGG76JJqNEsuAyS9HMcog',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
@@ -130,6 +144,7 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # production collected files
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
