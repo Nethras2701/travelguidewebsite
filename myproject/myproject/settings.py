@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-piq-aq&=ghnii0_k_@0q(i597%0$zh_qc_ao1@4c=4wpzot4&d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['travelguide.com', 'travelguidewebsite.pythonanywhere.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['travelguide.com','travelguidewebsite.onrender.com', 'travelguidewebsite.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
