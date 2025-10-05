@@ -58,8 +58,8 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 import os
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
