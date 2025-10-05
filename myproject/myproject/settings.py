@@ -23,10 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-piq-aq&=ghnii0_k_@0q(i597%0$zh_qc_ao1@4c=4wpzot4&d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+DEBUG = False
+ALLOWED_HOSTS = ['travelguide.com', 'nethras.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -130,6 +128,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # dev static files
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # production collected files
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
