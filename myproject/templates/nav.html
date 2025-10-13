@@ -1,6 +1,11 @@
 <nav>
     <div class="logo"><i class="fa-solid fa-plane-departure"></i> Travel Guide</div>
-    <div class="navlinks">
+     <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="navlinks" id="navlinks">
         {% if user.is_authenticated %}
             <a href="{% url 'create_destination' %}">
                 <i class="fa-solid fa-map-pin"></i> Add Destination</a>
