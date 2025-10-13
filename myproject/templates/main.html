@@ -25,6 +25,15 @@
        
     {% endblock %}
     </center>
- 
+ <script>
+  const hamburger = document.getElementById('hamburger');
+  const navlinks = document.getElementById('navlinks');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navlinks.classList.toggle('show');
+  });
+</script>
+
 </body>
 </html>
